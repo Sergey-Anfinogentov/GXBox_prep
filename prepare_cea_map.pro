@@ -16,7 +16,7 @@
   ;
   ;
   ;
-  ; :Author: Sergey ANfinogentov
+  ; :Author: Sergey Anfinogentov
   ;-
 function prepare_cea_map, file_field, file_inclination, file_azimuth, file_disambig, center_arcsec, size_pix, dx_deg, WCS = WCS, carrington = carrington
 
