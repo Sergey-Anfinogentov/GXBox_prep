@@ -26,7 +26,7 @@ function prepare_cea_map, file_field, file_inclination, file_azimuth, file_disam
   wcs0 = FITSHEAD2WCS( index[0] )
   
   ;Apply disambigution--------------------------------
-  read_sdo, file_disambig, index, disambig
+  read_sdo, file_disambig, index, disambig, /uncomp_delete, /use_shared_lib
   azimuth  =reform(data[*,*,2])
   hmi_disambig, azimuth, disambig, 0
   data[*,*,2] = azimuth
