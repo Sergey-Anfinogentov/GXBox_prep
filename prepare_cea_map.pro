@@ -47,7 +47,8 @@ function prepare_cea_map, file_field, file_inclination, file_azimuth, file_disam
   
   ;Make WCS for resulting CEA map
   if not keyword_set(wcs) then begin
-    wcs = WCS_2D_SIMULATE( size_pix[0], size_pix[1],cdelt = dx_deg, crval =[lon,lat], type ='CR', projection = 'cea')
+    wcs = WCS_2D_SIMULATE( size_pix[0], size_pix[1],cdelt = dx_deg, crval =[lon,lat], type ='CR', projection = 'cea',$
+       date_obs = index.date_obs)
   endif
   
  ;Coordinate transformnation----
