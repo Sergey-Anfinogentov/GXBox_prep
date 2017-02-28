@@ -7,7 +7,7 @@ All routines are designed to be used in [Solar Soft](http://www.lmsal.com/solars
 
 ## Routines
 
-### prepare_cea_map.pro
+### PREPARE_CEA_MAP
 #### Description
     Generate magnetic field maps in Cylindrical Equal Area (CEA) projection from SDO/HMI magnetograms
 
@@ -37,3 +37,31 @@ Returns a structure containing the following fields
 
 - WCS - (optional input), WCS structure, describing the CEA projection where to map field to
 - Carrington - set this keyword if the centre of the patch is given in degrees as Carrington longitude and latitude
+
+### WCS_REMAP
+
+#### Description
+
+```
+ Remaps data from one World Coordinate System (WCS) to anothe
+```
+
+#### Calling sequence
+
+```idl
+ data_to = wcs_remap(data_from, wcs_from, wcs_to)
+```
+
+#### Returning value
+
+Returns two-dimensional array containing remapped image
+
+#### Parameters
+
+- *data_from* - data to be remapped
+- *wcs_from* - WCS structure describing coordinate system of the given
+- *wcs_to* - structure describing coordinate system where the data will be remapped to
+
+#### Keywords
+
+None
