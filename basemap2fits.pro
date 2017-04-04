@@ -26,10 +26,10 @@ pro basemap2fits, basemaps, name_out
   
   hdr = wcs2fitshead(basemaps.wcs)
   
-  writefits, file_bp, basemaps.bp
-  writefits, file_bt, basemaps.bt
-  writefits, file_br, basemaps.br
-  writefits, file_Ic, basemaps.ic
+  writefits, file_bp, basemaps.bp, hdr
+  writefits, file_bt, basemaps.bt, hdr
+  writefits, file_br, basemaps.br, hdr
+  writefits, file_Ic, basemaps.ic, hdr
 
 
 end
