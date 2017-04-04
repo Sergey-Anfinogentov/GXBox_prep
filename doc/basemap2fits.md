@@ -1,6 +1,6 @@
 # BASEMAP2FITS
 ## Description
-Saves the result of the PREPARE_BASEMAPS function into fits files.
+Saves the result of the (PREPARE_BASEMAPS)[prepare_basemaps.md] function into fits files.
 ## Params
 * *basemap* - Structure ruturned by the PREPARE_BASEMAPS function
 * *name_out* - String identifying the output files.
