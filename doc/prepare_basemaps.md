@@ -14,7 +14,7 @@ Returns a structure containing the following fields:
 * *file_inclination* - file name of the INCLINATION fits file
 * *file_azimuth* - file name of the AZIMUTH fits file
 * *file_disambig* - file name of the DISAMBIGuation fits file
-* *center_arcsec* - center of the patch to be mapped into CEA projection
+* *center_arcsec* - center of the patch to be mapped
 * *size_pix* - size of the resulting CEA map in pixels
 * *dx_km* - spatial resolution of the resulting  map in kilometers
 ## Keywords
