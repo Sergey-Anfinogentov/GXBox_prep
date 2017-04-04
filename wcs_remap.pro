@@ -4,7 +4,7 @@
   ;    Remaps data from one World Coordinate System (WCS) to anothe
   ;
   ; :Params:
-  ;    data_from - data to be remappes
+  ;    data_from - data to be remapped
   ;    wcs_from - WCS structure describing coordinate system of the given
   ;    wcs_to - WCS structure describing coordinate system where the data will be remapped to
   ;
