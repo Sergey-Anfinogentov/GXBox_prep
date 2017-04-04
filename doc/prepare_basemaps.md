@@ -3,7 +3,7 @@
 Generate magnetic field maps in Cylindrical Equal Area (CEA) or Top View projection from SDO/HMI magnetograms
 
 ## Output
-   returns a structure containing the following fields:
+Returns a structure containing the following fields:
 * *Bp*  - longitudinal component of the magnetic field
 * *Bt*  - latitudinal component of the magnetic field
 * *Br*  - radial component of the magnetic field
