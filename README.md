@@ -7,6 +7,8 @@ All routines are designed to be used in [Solar Soft](http://www.lmsal.com/solars
 
 ## Routines
 
-* [PREPARE_CEA_MAP](doc/prepare_cea_map.md)
+* [PREPARE_BASEMAPS](doc/prepare_basemaps.md)
 * [WCS_REMAP](doc/wcs_remap.md)
+* [BASEMAP2FITS](doc/basemap2fits.md)
+* [PREPARE_CEA_MAP(obsolete)](doc/prepare_cea_map.md)
 
