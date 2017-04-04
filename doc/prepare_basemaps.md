@@ -1,6 +1,6 @@
 # PREPARE_BASEMAPS 
 ## Description
-    Generate magnetic field maps in Cylindrical Equal Area (CEA) or Top View projection from SDO/HMI magnetograms
+Generate magnetic field maps in Cylindrical Equal Area (CEA) or Top View projection from SDO/HMI magnetograms
 
 ## Output
    returns a structure containing the following fields:
