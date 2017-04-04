@@ -1,6 +1,6 @@
 # PREPARE_CEA_MAP
 ## Description
-    Generate magnetic field maps in Cylindrical Equal Area (CEA) projection from SDO/HMI magnetograms
+Generate magnetic field maps in Cylindrical Equal Area (CEA) projection from SDO/HMI magnetograms
 ## Calling sequence
 
 ```idl
