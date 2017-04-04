@@ -7,61 +7,6 @@ All routines are designed to be used in [Solar Soft](http://www.lmsal.com/solars
 
 ## Routines
 
-### PREPARE_CEA_MAP
-#### Description
-    Generate magnetic field maps in Cylindrical Equal Area (CEA) projection from SDO/HMI magnetograms
+* [PREPARE_CEA_MAP](doc/prepare_cea_map.md)
+* [WCS_REMAP](doc/wcs_remap.md)
 
-#### Calling sequence
-
-```idl
- res = prepare_cea_map(file_field, file_inclination, file_azimuth, file_disambig, center, sz, dx[, wcs = wcs][, /carrington)
-```
-#### Returning value
-Returns a structure containing the following fields
-* *WCS* - WCS structure containing information about the map position and projection
-* *Bp* - PHI component of the magnetic field
-    * *Bt* - THETA component of the magnetic field
-    * *Br* - RADIAL magnetic field component
-
-#### Parameters
-*   *file_field* - file name of the FIELD fits file
-*   *file_inclination* - file name of the INCLINATION fits file
-     *   *file_azimuth* - file name of the AZIMUTH fits file
-     *   *file_disambig* - file name of the DISAMBIGuation fits file
-     *   *center_arcsec* - 2 element array, center of the patch to be mapped into CEA projection
-     *   *size_pix* - 2 element array, size of the resulting CEA map in pixels
-     *   *dx_deg* - spatial resolution of the resulting CEA map in heliographic degrees
-
-
-#### Keywords
-
-- WCS - (optional input), WCS structure, describing the CEA projection where to map field to
-- Carrington - set this keyword if the centre of the patch is given in degrees as Carrington longitude and latitude
-
-### WCS_REMAP
-
-#### Description
-
-```
- Remaps data from one World Coordinate System (WCS) to anothe
-```
-
-#### Calling sequence
-
-```idl
- data_to = wcs_remap(data_from, wcs_from, wcs_to)
-```
-
-#### Returning value
-
-Returns two-dimensional array containing remapped image
-
-#### Parameters
-
-- *data_from* - data to be remapped
-- *wcs_from* - WCS structure describing coordinate system of the given
-- *wcs_to* - structure describing coordinate system where the data will be remapped to
-
-#### Keywords
-
-None
