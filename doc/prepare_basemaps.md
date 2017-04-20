@@ -7,6 +7,7 @@ Returns a structure containing the following fields:
 * *Bp*  - longitudinal component of the magnetic field
 * *Bt*  - latitudinal component of the magnetic field
 * *Br*  - radial component of the magnetic field
+* *Ic*  - Continuum intensity
 * *WCS* - WCS structure describing the projection
 
 ## Params
@@ -14,6 +15,7 @@ Returns a structure containing the following fields:
 * *file_inclination* - file name of the INCLINATION fits file
 * *file_azimuth* - file name of the AZIMUTH fits file
 * *file_disambig* - file name of the DISAMBIGuation fits file
+* *file_continuum* - file name of the continuum with removed limb darkening fits file
 * *center_arcsec* - center of the patch to be mapped
 * *size_pix* - size of the resulting CEA map in pixels
 * *dx_km* - spatial resolution of the resulting  map in kilometers
