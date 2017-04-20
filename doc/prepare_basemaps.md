@@ -21,4 +21,5 @@ Returns a structure containing the following fields:
 * *dx_km* - spatial resolution of the resulting  map in kilometers
 ## Keywords
 * *WCS* - (optional input), WCS structure, describing the projection where to map field to
-* *Carrington* - set this if the center of the patch is given as longitude and latitude (degrees) in carrington coordinate system  
+* *Carrington* - set this if the center of the patch is given as longitude and latitude (degrees) in carrington coordinate system
+* *Top* - set this keyword to create the "Top view" map
