@@ -66,7 +66,8 @@ function prepare_basemaps, file_field, file_inclination, file_azimuth, file_disa
            type ='CR', projection = 'cea', date_obs = index.date_obs)
     endif
     if keyword_set(top) then begin     
-      WCS = WCS_2D_SIMULATE(size_pix[0], size_pix[1], CDELT=dx_arcsec, DSUN_OBS=DSUN_OBS, CRLN_OBS=lon, CRLT_OBS=lat)      
+      WCS = WCS_2D_SIMULATE(size_pix[0], size_pix[1], CDELT=dx_arcsec, DSUN_OBS=DSUN_OBS,$
+         CRLN_OBS=lon, CRLT_OBS=lat, date_obs = index.date_obs)     
     endif
     
   endif
