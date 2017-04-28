@@ -1,4 +1,5 @@
-# Instruction for creation of GX-simulator comptible box file
+# Instruction for creation of GX-simulator compatible box file
+Please, check the most recent version of needed IDL routines at https://github.com/Sergey-Anfinogentov/IDL_magnetic.
 
 ## Downloading requered SDO/HMI FITS files
 SDO/HMI FITS files can be downloaded from the http://jsoc.stanford.edu/ajax/lookdata.html. The toolchain is designed to use the full disk images and magnetograms:
