@@ -1,4 +1,5 @@
 # Instruction for creation of GX-simulator comptible box file
+
 ## Downloading requered SDO/HMI FITS files
 SDO/HMI FITS files can be downloaded from the http://jsoc.stanford.edu/ajax/lookdata.html. The toolchain is designed to use the full disk images and magnetograms:
 1. Full disk vector magnetograms with resolved azimuthal ambiguity `hmi.B_720s`. The following data segments are needed:
@@ -29,6 +30,7 @@ After creating the magnetic field data cube inside the box structure is filled w
 gx_box_make_potential_field, box
 ```
 Where `box` is the box structure created with the `gx_box_create` function.
+
 ## Adding reference maps to the box
 Optionally, on can add to the box structure reference maps using the `gx_box_add_refmap` procedure. For example, the following code ads to the box structue LOS field and Continuum  reference maps:
 ```IDL
@@ -39,6 +41,7 @@ where:
 * `box` is the box structure created with the `gx_box_create` function
 * `file_bz` is the path of the FITS file containing LOS field observations
 * `id = 'Bz_reference'` is the keyword, specifing ID of the map
+
 ## Saving the result
 Now the box structure  can be saves to a file, which can be later imported into GX-Simulator
 ```IDL
