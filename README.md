@@ -1,6 +1,8 @@
 # IDL_magnetic
 
-IDL rootines for working with SDO/HMI magnetograms.
+The repository contains IDL rootines for working with SDO/HMI magnetograms.
+For preparing a GX-simulator compayible box file please read  the [instruction](doc/gx_box_instruction.md)
+
 
 ## Dependencies
 All routines are designed to be used in [Solar Soft](http://www.lmsal.com/solarsoft/sswdoc/sswdoc_jtop.html) environment and requre _SDO/HMI_ and _Ontology_ packages.
