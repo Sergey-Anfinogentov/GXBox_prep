@@ -29,10 +29,9 @@
   ;-
 function prepare_basemaps, file_field, file_inclination, file_azimuth, file_disambig, file_continuum,$
  center_arcsec, size_pix, dx_km, WCS = WCS, carrington = carrington, cea = cea, top = top
+ compile_opt idl2
    
-   DSUN_OBS=1.5E11 ; Distance from Earth  to  Sun. This value is used to simulate top view maps
-   dx_deg = dx_km*1d3 / WCS_RSUN() * !radeg
-   dx_arcsec = dx_km*1d3 / DSUN_OBS * !radeg * 3600d
+   
    
    if (not keyword_set(cea)) and (not keyword_set(top)) then cea = 1
 
@@ -40,6 +39,12 @@ function prepare_basemaps, file_field, file_inclination, file_azimuth, file_disa
   read_sdo,files, index, data, /uncomp_delete, /use_shared_lib
   
   wcs0 = FITSHEAD2WCS( index[0] )
+  
+  
+  DSUN_OBS  = wcs0.position.dsun_obs ;
+  dx_deg = dx_km*1d3 / WCS_RSUN() * !radeg
+  dx_arcsec = dx_km*1d3 / DSUN_OBS * !radeg * 3600d
+  
   
   ;Apply disambigution--------------------------------
   read_sdo, file_disambig, index, disambig, /uncomp_delete, /use_shared_lib
@@ -79,7 +84,7 @@ function prepare_basemaps, file_field, file_inclination, file_azimuth, file_disa
   bt = wcs_remap(bptr[*,*,1],wcs0, wcs)
   br = wcs_remap(bptr[*,*,2],wcs0, wcs)
   
-  read_sdo, file_continuum, index, data
+  read_sdo, file_continuum, index, data, /uncomp_delete,/use_shared_lib
   wcs0 = FITSHEAD2WCS( index[0] )
   ic = wcs_remap(data, wcs0, wcs)
   

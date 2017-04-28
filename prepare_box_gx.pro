@@ -25,13 +25,13 @@ pro prepare_box_gx, file_bp, file_bt, file_br, file_ic, file_Bcube, dx_km, file_
   restore,file_Bcube
   
   ;The resolution of the extrapolation must be defind here in SOLAR RADIUS UNITS (RSUN=1): 
-  default,dr,[dx_km*1d3,dx_km*1d3,dx_km*1d3]/wcs_rsun()
+  dr = [dx_km*1d3,dx_km*1d3,dx_km*1d3]/wcs_rsun()
   
   wcs = FITSHEAD2WCS( index)
   
   
   
-  box={bx:bx,by:by,bz:bz,dr:dr, add_base_layer:0,base:base,index:index}
+  box={bx:bx, by:by, bz:bz, dr:dr, add_base_layer:0, base:base, index:index, refmaps: ptr_new(refmaps)}
   stop
   save, box, file = file_box
 
