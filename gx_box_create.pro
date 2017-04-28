@@ -12,7 +12,7 @@
   ;    file_continuum - file name of the continuum with removed limb darkening fits file
   ;    center_arcsec - center of the patch to be mapped into the base of the box
   ;    size_pixx - [nx, ny, nz] size of the resulting box in voxels
-  ;    dx_km
+  ;    dx_km - spatial resolution (voxel size) in kilometers
   ;
   ; :Keywords:
   ;    carrington - set this keyword if the box center is given as carrington longitude and latitude in degrees
