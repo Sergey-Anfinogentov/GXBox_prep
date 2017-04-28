@@ -1,3 +1,18 @@
+;+
+  ; :Description:
+  ;    Adds the reference map to the box structure. The map will be cut out to
+  ;    to have th field of view 10% larger then that of the box's basemap.
+  ;    Spatial resolution of the remains the same as in given FITS
+  ;
+  ; :Params:
+  ;    box - GX-Simulator Compatible box structure
+  ;    fits_file - file name of the FITS containing the base map
+  ;
+  ; :Keywords:
+  ;    id - ID of the reference map (e.g. "Bz reference")
+  ;
+  ; :Author: Sergey Anfinogentov (anfinogentov@iszf.irk.ru)
+  ;-
 pro gx_box_add_refmap, box, fits_file, id = id
 
   wcs = fitshead2wcs(box.index)

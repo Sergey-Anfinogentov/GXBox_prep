@@ -1,3 +1,26 @@
+;+
+  ; :Description:
+  ;    Creates the GX-simulator compatible box structure from SDO/HMI full disk fits files
+  ;
+  ; :Output:
+  ;   Returns GX-simulator compatible box structure
+  ; :Params:
+  ;    file_field - file name of the FIELD fits file
+  ;    file_inclination - file name of the INCLINATION fits file
+  ;    file_azimuth - file name of the AZIMUTH fits file
+  ;    file_disambig - file name of the DISAMBIGuation fits file
+  ;    file_continuum - file name of the continuum with removed limb darkening fits file
+  ;    center_arcsec - center of the patch to be mapped into the base of the box
+  ;    size_pixx - [nx, ny, nz] size of the resulting box in voxels
+  ;    dx_km
+  ;
+  ; :Keywords:
+  ;    carrington - set this keyword if the box center is given as carrington longitude and latitude in degrees
+  ;    cea - set this keyword to use the CEA projection for the base of the box
+  ;    top - set this keyword to use the TOP VIEW projection for the base of the box
+  ;
+  ; :Author: Sergey Anfinogentov (anfinogentov@iszf.irk.ru)
+  ;-
 function gx_box_create, file_field, file_inclination, file_azimuth, file_disambig, file_continuum,$
   center_arcsec, size_pix, dx_km, carrington = carrington, cea = cea, top = top
   
