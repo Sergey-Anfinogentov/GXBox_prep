@@ -1,4 +1,4 @@
-# Instruction for creation of GX-simulator compatible box file
+# Instruction for creating a GX-simulator compatible box file
 Please, check the most recent version of needed IDL routines at https://github.com/Sergey-Anfinogentov/IDL_magnetic.
 
 ## Downloading requered SDO/HMI FITS files
@@ -8,9 +8,9 @@ SDO/HMI FITS files can be downloaded from the http://jsoc.stanford.edu/ajax/look
    * Inclination
    * Azimuth
    * Disambig
-1.	Full disk SDO/HMI continuum image with limb darkening removed `hmi.Ic_noLimbDark_720s`
-1.	Full disk SDO/HMI line of sight magnetogram `hmi.M_720s`
-1.	Additional observational data if required (EUV, radio, etc)
+     1.Full disk SDO/HMI continuum image with limb darkening removed `hmi.Ic_noLimbDark_720s`
+     1.Full disk SDO/HMI line of sight magnetogram `hmi.M_720s`
+     1.Additional observational data if required (EUV, radio, etc)
 
 ## Creating the box structure
 The box structure can be created using the following IDL code:
@@ -33,7 +33,7 @@ gx_box_make_potential_field, box
 Where `box` is the box structure created with the `gx_box_create` function.
 
 ## Adding reference maps to the box
-Optionally, on can add to the box structure reference maps using the `gx_box_add_refmap` procedure. For example, the following code ads to the box structue LOS field and Continuum  reference maps:
+Optionally, one can add to the box reference maps using the `gx_box_add_refmap` procedure. For example, the following code adds LOS field and Continuum  reference maps:
 ```IDL
 gx_box_add_refmap, box, file_bz, id = 'Bz_reference'
 gx_box_add_refmap, box, file_continuum, id = 'Ic_reference'
@@ -44,7 +44,7 @@ where:
 * `id = 'Bz_reference'` is the keyword, specifing ID of the map
 
 ## Saving the result
-Now the box structure  can be saves to a file, which can be later imported into GX-Simulator
+Now the box structure  can be saved to a file, which can be later imported into GX-Simulator.
 ```IDL
  save, box, file ='testbox.sav'
 ```
