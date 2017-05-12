@@ -23,7 +23,7 @@ where:
 * `centre` is the position of the cetre of the box in arcseconds,
 * `size_pix` is requested size of the box in voxels,
 * `dx_km` is the requsted spatial resolution (voxel size) of the box,
-* `\cea` is a keyword indicating that the base of the box will be calculated in *CEA* projection. It can be replced with the *top view* projection by setting the `\top` keyword instead.
+* `/cea` is a keyword indicating that the base of the box will be calculated in *CEA* projection. It can be replced with the *top view* projection by setting the `/top` keyword instead.
 
 ## Calculating the potential field inside the box
 After creating the magnetic field data cube inside the box structure is filled with zeroes. To fill it with the potential field one can call `gx_box_make_potential_field` routine:
