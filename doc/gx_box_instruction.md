@@ -2,7 +2,19 @@
 Please, check the most recent version of needed IDL routines at https://github.com/Sergey-Anfinogentov/IDL_magnetic.
 
 ## Downloading requered SDO/HMI FITS files
-SDO/HMI FITS files can be downloaded from the http://jsoc.stanford.edu/ajax/lookdata.html. The toolchain is designed to use the full disk images and magnetograms:
+SDO/HMI FITS files can be downloaded from the http://jsoc.stanford.edu/ajax/lookdata.html. 
+
+Alternatively, all required data can be downloaded using the `DOWNLOAD_JSOC_HMI_FITS` routine: 
+
+```
+time = '2016-02-20 17:00:00'
+out_dir = 'C:\data'
+email = 'user@host.ru'
+download_jsoc_hmi_fits, time, out_dir = out_dir, email = email
+```
+
+The toolchain is designed to use the full disk images and magnetograms:
+
 1. Full disk vector magnetograms with resolved azimuthal ambiguity `hmi.B_720s`. The following data segments are needed:
    * Field
    * Inclination

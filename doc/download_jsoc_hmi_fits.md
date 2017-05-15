@@ -5,7 +5,8 @@
 
 
  ## Parameters
-* *time* - time of the magnetogram (any format recognised by ANYTIM)
+* *time* - time of the magnetogram (any format recognised by `ANYTIM` function from SSW)
  ## Keywords
-* *out_dir* - path to the directory, where FITS files will be saved
-* *email* - notify e-mail address registered in JSOC
+* *out_dir* - path to the directory, where FITS files will be saved (default: current directory)
+* *email* - notify e-mail address registered in JSOC (default: undefined)
+
