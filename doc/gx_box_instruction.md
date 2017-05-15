@@ -6,7 +6,7 @@ SDO/HMI FITS files can be downloaded from the http://jsoc.stanford.edu/ajax/look
 
 Alternatively, all required data can be downloaded using the `DOWNLOAD_JSOC_HMI_FITS` routine: 
 
-```
+```idl
 time = '2016-02-20 17:00:00'
 out_dir = 'C:\data'
 email = 'user@host.ru'
@@ -20,13 +20,13 @@ The toolchain is designed to use the full disk images and magnetograms:
    * Inclination
    * Azimuth
    * Disambig
-1. Full disk SDO/HMI continuum image with limb darkening removed `hmi.Ic_noLimbDark_720s`
-1. Full disk SDO/HMI line of sight magnetogram `hmi.M_720s`
-1. Additional observational data if required (EUV, radio, etc)
+2. Full disk SDO/HMI continuum image with limb darkening removed `hmi.Ic_noLimbDark_720s`
+3. Full disk SDO/HMI line of sight magnetogram `hmi.M_720s`
+4. Additional observational data if required (EUV, radio, etc)
 
 ## Creating the box structure
 The box structure can be created using the following IDL code:
-```IDL
+```idl
 box = gx_box_create(file_field, file_inclination, file_azimuth,$
 file_disambig, file_continuum, centre, size_pix, dx_km, /cea)
 ```
