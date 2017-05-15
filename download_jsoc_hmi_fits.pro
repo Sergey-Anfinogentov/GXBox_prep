@@ -59,7 +59,7 @@ end
   ;    Downloads from JSOC all SDO/HMI files required to produce GX-simulator box
   ;
   ; :Params:
-  ;    time - time of the magnetogram (anytim recognisable format)
+  ;    time - time of the magnetogram (any format recognised by ANYTIM)
   ;
   ; :Keywords:
   ;    out_dir - path to the directory, where FITS files will be saved
