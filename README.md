@@ -8,7 +8,7 @@ For preparing a GX-simulator compayible box file please read  the [instruction](
 All routines are designed to be used in [Solar Soft](http://www.lmsal.com/solarsoft/sswdoc/sswdoc_jtop.html) environment and requre _SDO/HMI_ and _Ontology_ packages.
 
 ## Routines
-* [DOWNLOAD_JSOC_HMI_FITS](download_jsoc_hmi_fits.md)
+* [DOWNLOAD_JSOC_HMI_FITS](doc/download_jsoc_hmi_fits.md)
 * [GX_BOX_CREATE](doc/gx_box_create.md)
 * [GX_BOX_MAKE_POTENTIAL_FIELD](doc/gx_box_make_potential_field.md)
 * [GX_BOX_ADD_REFMAP](doc/gx_box_add_refmap.md)
