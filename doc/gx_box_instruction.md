@@ -20,9 +20,9 @@ The toolchain is designed to use the full disk images and magnetograms:
    * Inclination
    * Azimuth
    * Disambig
-     1.Full disk SDO/HMI continuum image with limb darkening removed `hmi.Ic_noLimbDark_720s`
-     1.Full disk SDO/HMI line of sight magnetogram `hmi.M_720s`
-     1.Additional observational data if required (EUV, radio, etc)
+1. Full disk SDO/HMI continuum image with limb darkening removed `hmi.Ic_noLimbDark_720s`
+1. Full disk SDO/HMI line of sight magnetogram `hmi.M_720s`
+1. Additional observational data if required (EUV, radio, etc)
 
 ## Creating the box structure
 The box structure can be created using the following IDL code:
