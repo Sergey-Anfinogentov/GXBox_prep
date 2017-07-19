@@ -43,6 +43,16 @@ gx_box_make_potential_field, box
 ```
 Where `box` is the box structure created with the `gx_box_create` function.
 
+## NLFFF extrapolation (Windows only)
+
+The NLFFF extrapolation can be performed using the code developed by Alexey G. Stupishin (Saint Petersburg State University).
+
+```idl
+return_code = gx_box_make_nlfff_wwas_field("WWNLFFFReconstruction.dll", box)
+```
+
+
+
 ## Adding reference maps to the box
 Optionally, one can add to the box reference maps using the `gx_box_add_refmap` procedure. For example, the following code adds LOS field and Continuum  reference maps:
 ```IDL

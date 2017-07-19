@@ -115,6 +115,10 @@ function gx_box_make_nlfff_wwas_field, dll_location, box, _extra = _extra
   box.bx = transpose(by, [1, 0, 2])
   box.by = transpose(bx, [1, 0, 2])
   box.bz = transpose(bz, [1, 0, 2])
+  
+  expr = stregex(box.id,'(.+)\.([A-Z]+)',/subexpr,/extract)
+  box.id = expr[1] + '.NAS'
+
 
   return, returnCode
 end
