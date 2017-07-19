@@ -70,14 +70,7 @@ function gx_box_create, file_field, file_inclination, file_azimuth, file_disambi
   If keyword_set(TOP) then ID = ID + '.TOP'
   
   ID = ID + '.NONE'
-  
-  
-  
-  print, ID
-  
-  
-  
-  stop
+
   
   return, {bx:bx,by:by,bz:bz,dr:dr, add_base_layer:0,base:base,index:index, refmaps: ptr_new(refmaps), ID: ID}
 
