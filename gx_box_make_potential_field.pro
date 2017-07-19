@@ -20,7 +20,10 @@ pro gx_box_make_potential_field, box
   box.bx[*,*,1:*] = field.bx[*,*,1:*]
   box.by[*,*,1:*] = field.by[*,*,1:*]
   box.bz[*,*,1:*] = field.bz[*,*,1:*]
-  
+
+  expr = stregex(box.id,'(.+)\.([A-Z]+)',/subexpr,/extract)  
+  box.id = expr[1] + '.POT'
+
 
 
 end
