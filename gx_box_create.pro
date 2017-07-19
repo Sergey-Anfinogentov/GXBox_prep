@@ -44,6 +44,41 @@ function gx_box_create, file_field, file_inclination, file_azimuth, file_disambi
   bz[*,*,0] = base.bz
   refmaps=obj_new('map')
   
-  return, {bx:bx,by:by,bz:bz,dr:dr, add_base_layer:0,base:base,index:index, refmaps: ptr_new(refmaps)}
+  ID = 'hmi.M_720s' ;Only HMI data is supported for now
+  
+  tim  = anytim(round(anytim(wcs.time.observ_date)),/ccsds,/trunc)
+  tim = str_replace(tim, '-','')
+  tim = str_replace(tim, ':','')
+  tim = str_replace(tim, 'T','_')
+  ID = ID +'.'+ tim
+  
+  crd =wcs_get_coord(wcs, wcs.crpix)
+  wcs_convert_from_coord, wcs, crd, 'hg', lon, lat, /carrington
+  if lon lt 0 then begin
+    lon_str = 'E'+strcompress(round(abs(lon)),/remove)
+  endif else begin
+    lon_str = 'W'+strcompress(round(abs(lon)),/remove)
+  endelse
+  if lat lt 0 then begin
+    lat_str = 'S'+strcompress(round(abs(lat)),/remove)
+  endif else begin
+    lat_str = 'N'+strcompress(round(abs(lat)),/remove)
+  endelse
+  ID = ID +'.'+ lon_str + lat_str +'CR'
+  
+  If keyword_set(CEA) then ID = ID + '.CEA'
+  If keyword_set(TOP) then ID = ID + '.TOP'
+  
+  ID = ID + '.NONE'
+  
+  
+  
+  print, ID
+  
+  
+  
+  stop
+  
+  return, {bx:bx,by:by,bz:bz,dr:dr, add_base_layer:0,base:base,index:index, refmaps: ptr_new(refmaps), ID: ID}
 
 end
