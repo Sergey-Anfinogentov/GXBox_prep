@@ -52,7 +52,7 @@ function gx_box_create, file_field, file_inclination, file_azimuth, file_disambi
   tim = str_replace(tim, 'T','_')
   ID = ID +'.'+ tim
   
-  crd =wcs_get_coord(wcs, wcs.crpix)
+  crd =wcs_get_coord(wcs, wcs.crpix-1d)
   wcs_convert_from_coord, wcs, crd, 'hg', lon, lat, /carrington
   if lon lt 0 then begin
     lon_str = 'E'+strcompress(round(abs(lon)),/remove)

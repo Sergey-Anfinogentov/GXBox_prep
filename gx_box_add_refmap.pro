@@ -55,6 +55,8 @@ pro gx_box_add_refmap, box, fits_file, id = id
   foo = wcs_remap(data, wcs_input, wcs_ref)
   wcs2map,foo,wcs_ref, map
   map.id = id
+  map.xc += 0.5
+  map.yc += 0.5
   
   ind = (*box.refmaps).get(/count)
   (*box.refmaps).set,ind, map = map
