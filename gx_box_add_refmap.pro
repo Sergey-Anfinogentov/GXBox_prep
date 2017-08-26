@@ -18,6 +18,12 @@ pro gx_box_add_refmap, box, fits_file, id = id
   wcs = fitshead2wcs(box.index)
   read_sdo,fits_file, index, data, /uncomp_delete, /use_shared_lib
   wcs_input = fitshead2wcs(index)
+  
+  ;trying to correct position bug
+  wcs2map,data[*,*,0], wcs_input, map
+  map2wcs, map,wcs_input
+  
+  
   if not keyword_set(id) then get_fits_par,index, id =id
   
   
@@ -49,14 +55,18 @@ pro gx_box_add_refmap, box, fits_file, id = id
   nx_ref = round((xrange[1] - xrange[0])*1.1)
   ny_ref = round((yrange[1] - yrange[0])*1.1)
   
+  ;WCS_ref = WCS_2D_SIMULATE(nx_ref, ny_ref, CDELT=wcs_input.cdelt, DSUN_OBS=wcs_input.position.dsun_obs,$
+  ;   date_obs = wcs_input.time.observ_date, crval = crval_ref, crlt_obs =wcs_input.position.crlt_obs, crln_obs =wcs_input.position.crln_obs)
+     
   WCS_ref = WCS_2D_SIMULATE(nx_ref, ny_ref, CDELT=wcs_input.cdelt, DSUN_OBS=wcs_input.position.dsun_obs,$
      date_obs = wcs_input.time.observ_date, crval = crval_ref)
      
   foo = wcs_remap(data, wcs_input, wcs_ref)
   wcs2map,foo,wcs_ref, map
   map.id = id
-  map.xc += 0.5
-  map.yc += 0.5
+  map.b0 = wcs_ref.position.solar_b0
+; map.xc += 0.5
+;  map.yc += 0.5
   
   ind = (*box.refmaps).get(/count)
   (*box.refmaps).set,ind, map = map

@@ -40,10 +40,14 @@ function prepare_basemaps, file_field, file_inclination, file_azimuth, file_disa
   
   wcs0 = FITSHEAD2WCS( index[0] )
   
+  ;trying to correct position bug
+  wcs2map,data[*,*,0], wcs0, map
+  map2wcs, map,wcs0
   
-  DSUN_OBS  = wcs0.position.dsun_obs ;
-  dx_deg = dx_km*1d3 / WCS_RSUN() * !radeg
-  dx_arcsec = dx_km*1d3 / DSUN_OBS * !radeg * 3600d
+  
+  DSUN_OBS  = wcs0.position.dsun_obs;
+  dx_deg = dx_km*1d3 / WCS_RSUN() * 180d/!dpi
+  dx_arcsec = dx_km*1d3 / (DSUN_OBS - wcs_rsun() ) * 180d/!dpi * 3600d
   
   
   ;Apply disambigution--------------------------------
@@ -73,8 +77,8 @@ function prepare_basemaps, file_field, file_inclination, file_azimuth, file_disa
            type ='CR', projection = 'cea', date_obs = index.date_obs)
     endif
     if keyword_set(top) then begin     
-      WCS = WCS_2D_SIMULATE(size_pix[0], size_pix[1], CDELT=dx_arcsec, DSUN_OBS=DSUN_OBS,$
-         CRLN_OBS=lon, CRLT_OBS=lat, date_obs = index.date_obs)     
+      WCS = WCS_2D_SIMULATE(size_pix[0], size_pix[1], CDELT=dx_arcsec, DSUN_OBS=DSUN_OBS ,$
+         CRLN_OBS=lon, CRLT_OBS=lat, date_obs = index.date_obs)
     endif
     
   endif
@@ -86,6 +90,8 @@ function prepare_basemaps, file_field, file_inclination, file_azimuth, file_disa
   
   read_sdo, file_continuum, index, data, /uncomp_delete,/use_shared_lib
   wcs0 = FITSHEAD2WCS( index[0] )
+  wcs2map,data, wcs0, map
+  map2wcs, map,wcs0
   ic = wcs_remap(data, wcs0, wcs)
   
  

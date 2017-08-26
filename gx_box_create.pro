@@ -23,6 +23,7 @@
   ;-
 function gx_box_create, file_field, file_inclination, file_azimuth, file_disambig, file_continuum,$
   center_arcsec, size_pix, dx_km, carrington = carrington, cea = cea, top = top
+  setenv, 'WCS_RSUN=6.96d8'
   
   basemaps = prepare_basemaps(file_field, file_inclination, file_azimuth, file_disambig, file_continuum,$
               center_arcsec, size_pix, dx_km, WCS = WCS, carrington = carrington, cea = cea, top = top)

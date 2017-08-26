@@ -25,5 +25,5 @@ function wcs_remap, data_from, wcs_from, wcs_to, sample = sample
     limy = sz[2] - 1
     return, reform(data_from[round(pix[0,*,*]>0<limx), round(pix[1,*,*]>0<limx)])
   endif
-  return, reform(interpolate(data_from,pix[0,*,*],pix[1,*,*], cubic=-0.5))
+  return, reform(interpolate(data_from,pix[0,*,*], pix[1,*,*], cubic=-0.5))
 end
