@@ -65,8 +65,7 @@ pro gx_box_add_refmap, box, fits_file, id = id
   wcs2map,foo,wcs_ref, map
   map.id = id
   map.b0 = wcs_ref.position.solar_b0
-; map.xc += 0.5
-;  map.yc += 0.5
+
   
   ind = (*box.refmaps).get(/count)
   (*box.refmaps).set,ind, map = map
