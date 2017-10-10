@@ -22,16 +22,16 @@ function strreplace,str,find,replace
   endwhile
 end
 
-pro gx_box_download_hmi_data_get_fits, t1, t2, ds, segment, out_dir
+pro gx_box_download_hmi_data_get_fits, t1, t2, ds, segment, out_dir, cache_dir = cache_dir
   ssw_jsoc_time2data, t1, t2, index, urls, /urls_only, ds=ds, segment=segment
   time_s = strreplace(index.t_rec,'.','')
   time_s = strreplace(time_s,':','')
-  outfile = ds+'.'+time_S+'.'+segment+'.fits'
-  outfile = filepath(outfile, root = out_dir)
-  sock_copy,urls[0], outfile
-  read_sdo,outfile, temp_index, data
-  file_delete, outfile
-  mwritefits,index, data, outfile = outfile
+  out_file = ds+'.'+time_S+'.'+segment+'.fits'
+  out_file = filepath(out_file, root = out_dir)
+  ;sock_copy,urls[0], out_file
+  data_file = gx_box_download_jsoc(urls[0], cache_dir = cache_dir)
+  read_sdo,data_file, temp_index, data
+  mwritefits,index, data, outfile = out_file
   ;hdr = struct2fitshead(index)
   ;writefits, outfile, data, hdr, /compress
 end
@@ -46,7 +46,7 @@ end
 ;
 ; :Author: Sergey Anfinogentov (sergey.istp@gmail.com)
 ;-
-pro gx_box_download_hmi_data, t, out_dir
+pro gx_box_download_hmi_data, t, out_dir, cache_dir = cache_dir
   
   t_ = anytim(t)
   t1 = t_ - 720d/2d
@@ -58,7 +58,7 @@ pro gx_box_download_hmi_data, t, out_dir
   segment = ['field','inclination','azimuth','disambig','magnetogram','continuum']
   
   for i = 0, n_elements(ds)-1 do begin
-    gx_box_download_hmi_data_get_fits, t1, t2, ds[i], segment[i], out_dir
+    gx_box_download_hmi_data_get_fits, t1, t2, ds[i], segment[i], out_dir, cache_dir = cache_dir
   endfor
  
 end
