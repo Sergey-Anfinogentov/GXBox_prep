@@ -35,31 +35,27 @@ pro gx_box_download_hmi_data, t, out_dir, cache_dir = cache_dir, field = field,$
   ds = []
   segment = []
   
-  if keyword_set(field) then begin
+  if keyword_set(field) and gx_box_get_file(out_dir,/field) eq '' then begin
     ds      = [ds,'hmi.B_720s']
     segment = [segment,'field']
   endif
-  if keyword_set(inclination) then begin
+  if keyword_set(inclination) and gx_box_get_file(out_dir,/inclination) eq '' then begin
     ds      = [ds,'hmi.B_720s']
     segment = [segment,'inclination']
   endif
-  if keyword_set(azimuth) then begin
+  if keyword_set(azimuth) and gx_box_get_file(out_dir, /azimuth) eq '' then begin
     ds      = [ds,'hmi.B_720s']
     segment = [segment,'azimuth']
   endif
-  if keyword_set(azimuth) then begin
-    ds      = [ds,'hmi.B_720s']
-    segment = [segment,'azimuth']
-  endif
-  if keyword_set(disambig) then begin
+  if keyword_set(disambig)and gx_box_get_file(out_dir, /disambig) eq '' then begin
     ds      = [ds,'hmi.B_720s']
     segment = [segment,'disambig']
   endif
-  if keyword_set(magnetogram) then begin
+  if keyword_set(magnetogram) and gx_box_get_file(out_dir, /magnetogram) eq '' then begin
     ds      = [ds,'hmi.M_720s']
     segment = [segment,'magnetogram']
   endif
-  if keyword_set(continum) then begin
+  if keyword_set(continuum) and gx_box_get_file(out_dir, /continuum) eq '' then begin
     ds      = [ds,'hmi.Ic_noLimbDark_720s']
     segment = [segment,'continuum']
   endif

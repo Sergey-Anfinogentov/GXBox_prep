@@ -30,7 +30,6 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
   gx_box_download_hmi_data, time, out_dir, cache_dir = tmp_dir,/all
   
   file_field  =     gx_box_get_file(out_dir, /field)
-;  if f
   file_inclination= gx_box_get_file(out_dir, /inclination)
   file_azimuth=     gx_box_get_file(out_dir, /azimuth)
   file_disambig=    gx_box_get_file(out_dir, /disambig)
