@@ -1,4 +1,4 @@
-pro gx_box_download_aia_data, t, out_dir, cache_dir = cache_dir, UV = UV, EUV = EUV
+pro gx_box_download_aia_data, t,waves, out_dir, cache_dir = cache_dir, UV = UV, EUV = EUV
   
   if not keyword_set(UV) and not keyword_set(EUV) then EUV = 1
   
@@ -6,7 +6,7 @@ pro gx_box_download_aia_data, t, out_dir, cache_dir = cache_dir, UV = UV, EUV = 
  
 
   if not keyword_set(out_dir) then outdir = ''
-  ; ssw_jsoc_time2data, t1, t2, index_field,            ds='hmi.B_720s', segment='field'
+
   
   if keyword_set(EUV) then begin
     t1 = t_ - 12d/2d

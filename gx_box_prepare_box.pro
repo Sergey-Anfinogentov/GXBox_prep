@@ -21,22 +21,24 @@
   ; :Author: Sergey Anfinigentov (sergey.istp@gmail.com)
   ;-
 pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_dir = tmp_dir,$
-  aia_euv = aia_euv, aia_uv = aia_uv, auto_delete = auto_delete
+  aia_euv = aia_euv, aia_uv = aia_uv, auto_delete = auto_delete,top = top, cea = cea
   if not keyword_set(out_dir) then cd, current = out_dir
   if not keyword_set(tmp_dir) then tmp_dir = filepath('jsoc_cache',root = GETENV('IDL_TMPDIR'))
   if not keyword_set(dx_km) then dx_km = 1000d
   if not keyword_Set(size_pix) then size_pix = [128,128,64]
   
-  gx_box_download_hmi_data, time, out_dir, cache_dir = tmp_dir
+  gx_box_download_hmi_data, time, out_dir, cache_dir = tmp_dir,/all
   
   file_field  =     gx_box_get_file(out_dir, /field)
+;  if f
   file_inclination= gx_box_get_file(out_dir, /inclination)
   file_azimuth=     gx_box_get_file(out_dir, /azimuth)
   file_disambig=    gx_box_get_file(out_dir, /disambig)
   file_continuum=   gx_box_get_file(out_dir, /continuum)
   file_los =        gx_box_get_file(out_dir, /magnetogram)
 
-  box = gx_box_create(file_field, file_inclination, file_azimuth,file_disambig, file_continuum, centre, size_pix, dx_km, /top)
+  box = gx_box_create(file_field, file_inclination, file_azimuth,file_disambig,$
+     file_continuum, centre, size_pix, dx_km,top = top, cea = cea)
   gx_box_add_refmap, box, file_continuum, id = 'Continuum'
   gx_box_add_refmap, box, file_los, id = 'LOS_magnetogram'
   
@@ -87,6 +89,6 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
     endif
   endif
   
-  save, box, file = out_dir+"/"+box.id+".sav"
+  save, box, file =filepath(box.id+".sav",root_dir = out_dir)
   ;stop
 end
