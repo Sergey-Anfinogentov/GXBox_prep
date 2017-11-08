@@ -1,6 +1,5 @@
 pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_dir = tmp_dir,$
- aia_euv = aia_euv, auto_delete = auto_delete
-
+  aia_euv = aia_euv, aia_uv = aia_uv, auto_delete = auto_delete
   if not keyword_set(out_dir) then cd, current = out_dir
   if not keyword_set(tmp_dir) then tmp_dir = filepath('jsoc_cache',root = GETENV('IDL_TMPDIR'))
   if not keyword_set(dx_km) then dx_km = 1000d
@@ -28,7 +27,7 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
   
   ;Downloading AIA data in EUV channels
   if keyword_set(AIA_EUV) then begin
-    gx_box_download_AIA_data, time, out_dir, cache_dir = tmp_dir
+    gx_box_download_AIA_data, time, out_dir, cache_dir = tmp_dir, /euv
     
     file_94 =  gx_box_get_file(out_dir, /AIA_94)
     file_131 = gx_box_get_file(out_dir, /AIA_131)
@@ -50,6 +49,23 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
       file_delete, [file_94, file_131, file_171, file_193, file_211, file_304, file_335]
     endif
   endif
+  
+  if keyword_set(AIA_UV) then begin
+    gx_box_download_AIA_data, time, out_dir, cache_dir = tmp_dir, /uv
+
+    file_1600 =  gx_box_get_file(out_dir, /AIA_1600)
+    file_1700 =  gx_box_get_file(out_dir, /AIA_1700)
+
+
+    gx_box_add_refmap, box, file_1600,  id = 'AIA_1600'
+    gx_box_add_refmap, box, file_1700,  id = 'AIA_1700'
+    
+
+    if keyword_set(auto_delete) then begin
+      file_delete, [file_1600, file_1700]
+    endif
+  endif
+  
   save, box, file = out_dir+"/"+box.id+".sav"
   ;stop
 end

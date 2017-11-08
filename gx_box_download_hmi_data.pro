@@ -1,21 +1,3 @@
-;
-;
-;pro gx_box_download_hmi_data_get_fits, t1, t2, ds, segment, out_dir, cache_dir = cache_dir
-;  ssw_jsoc_time2data, t1, t2, index, urls, /urls_only, ds=ds, segment=segment
-;  time_s = strreplace(index.t_rec,'.','')
-;  time_s = strreplace(time_s,':','')
-;  out_file = ds+'.'+time_S+'.'+segment+'.fits'
-;  out_file = filepath(out_file, root = out_dir)
-;  ;sock_copy,urls[0], out_file
-;  data_file = gx_box_download_jsoc(urls[0], cache_dir = cache_dir)
-;  read_sdo,data_file, temp_index, data
-;  mwritefits,index, data, outfile = out_file
-;  ;hdr = struct2fitshead(index)
-;  ;writefits, outfile, data, hdr, /compress
-;end
-
-
-
 
 
 
