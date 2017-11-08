@@ -1,3 +1,14 @@
+
+;+
+  ; :Description:
+  ;    Example of preparing GX-Simulator compatible box file 
+  ;
+  ;
+  ;
+  ;
+  ;
+  ; :Author: Sergey Anfinigentov (sergey.istp@gmail.com)
+  ;-
 pro gx_box_example
   out_dir = '/Users/sergey/data_local/gx_box_test'
   tmp_dir = '/Users/sergey/temp/jsoc_cache'

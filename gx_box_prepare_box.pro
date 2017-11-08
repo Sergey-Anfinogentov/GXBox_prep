@@ -1,3 +1,25 @@
+;+
+  ; :Description:
+  ;    Prepares a GX-simulator comptible box filled with the potential field.
+  ;    All required data are download automatically.
+  ;
+  ; :Params:
+  ;    time - Requested time
+  ;    centre - [x0,y0], position of the box centre in arcseconds from the disk centre
+  ;    size_pix - [nx,ny,nz], size of the box in voxel
+  ;    dx_km - spatial resolution in kilometers
+  ;
+  ; :Keywords:
+  ;    out_dir - directory where to save the data (default: current directory)
+  ;    tmp_dir - temporary dierectory where to keep downloaded data segments
+  ;                (default: IDL temporary directory as returned by GETENV('IDL_TMPDIR'))
+  ;    aia_euv - Download images in AIA EUV channels and add them to the box as reference maps
+  ;    aia_uv  - Download images in AIA UV channels and add them to the box as reference maps
+  ;    auto_delete - Automatically delete all FITS files from the workind diectory
+  ;                  (OUT_DIR).The cached data segments will remain in TMP_DIR for future usage
+  ;
+  ; :Author: Sergey Anfinigentov (sergey.istp@gmail.com)
+  ;-
 pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_dir = tmp_dir,$
   aia_euv = aia_euv, aia_uv = aia_uv, auto_delete = auto_delete
   if not keyword_set(out_dir) then cd, current = out_dir
