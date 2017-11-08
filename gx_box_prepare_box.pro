@@ -14,7 +14,6 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
   file_continuum=   gx_box_get_file(out_dir, /continuum)
   file_los =        gx_box_get_file(out_dir, /magnetogram)
 
-  dx_km=750
   box = gx_box_create(file_field, file_inclination, file_azimuth,file_disambig, file_continuum, centre, size_pix, dx_km, /top)
   gx_box_add_refmap, box, file_continuum, id = 'Continuum'
   gx_box_add_refmap, box, file_los, id = 'LOS_magnetogram'
