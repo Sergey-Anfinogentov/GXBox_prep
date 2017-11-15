@@ -24,6 +24,6 @@ pro gx_box_example
   dx_km=1500.
   size_pix=[128,128,128]
   
-  gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir,/cea, tmp_dir = tmp_dir;,/aia_euv;, /aia_uv
+  gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir,/top, tmp_dir = tmp_dir,/auto_delete;,/aia_euv;, /aia_uv
 
 end
