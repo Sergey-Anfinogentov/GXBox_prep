@@ -1,61 +1,36 @@
-pro gx_box_download_aia_data, t, out_dir, cache_dir = cache_dir, UV = UV, EUV = EUV
+function gx_box_download_aia_data, t, out_dir, cache_dir = cache_dir, UV = UV, EUV = EUV
   
   if not keyword_set(UV) and not keyword_set(EUV) then EUV = 1
-  
   t_ = anytim(t)
- 
 
-  if not keyword_set(out_dir) then outdir = ''
-  ; ssw_jsoc_time2data, t1, t2, index_field,            ds='hmi.B_720s', segment='field'
   
-  if keyword_set(EUV) then begin
+
     t1 = t_ - 12d/2d
     t2 = t_ + 12d/2d +12d
 
+    
+    waves = []
     ds = []
     segment = []
-    waves = []
-    if gx_box_get_file(out_dir,/aia_171) eq '' then waves = [waves,'171']
-    if gx_box_get_file(out_dir,/aia_193) eq '' then waves = [waves,'193']
-    if gx_box_get_file(out_dir,/aia_211) eq '' then waves = [waves,'211']
-    if gx_box_get_file(out_dir,/aia_94)  eq '' then waves = [waves,'94']
-    if gx_box_get_file(out_dir,/aia_131) eq '' then waves = [waves,'131']
-    if gx_box_get_file(out_dir,/aia_304) eq '' then waves = [waves,'304']
-    if gx_box_get_file(out_dir,/aia_335) eq '' then waves = [waves,'335']
+    files ={}
+    if keyword_set(euv) then begin
+      waves = [waves,'171','193','211','94','131','304','335']
+      ds = [ds,replicate('aia.lev1_euv_12s',7)]
+      segment = [segment,replicate('image',7)]
+    endif
     
-    n = n_elements(waves)
-    if n gt 0 then begin
-      ds = replicate('aia.lev1_euv_12s',n)
-      segment = replicate('image',n)
+    if keyword_set(uv) then begin
+      waves = [waves,'1600','1700']
+      ds = [ds,replicate('aia.lev1_uv_24s',2)]
+      segment = [segment,replicate('image',2)]
     endif
     
     
-    for i = 0, n_elements(ds)-1 do begin
-      gx_box_download_jsoc_data_get_fits, t1, t2, ds[i], segment[i], waves = waves[i], out_dir, cache_dir = cache_dir
-    endfor
-  endif
-  
-  if keyword_set(UV) then begin
-    t1 = t_ - 24d/2d
-    t2 = t_ + 24d/2d +24d
-
-    ds = []
-    segment = []
-    waves = []
-    if gx_box_get_file(out_dir,/aia_1600) eq '' then waves = [waves,'1600']
-    if gx_box_get_file(out_dir,/aia_1700) eq '' then waves = [waves,'1700']
-
-
-    n = n_elements(waves)
-    if n gt 0 then begin
-      ds = replicate('aia.lev1_uv_24s',n)
-      segment = replicate('image',n)
-    endif
+    for i =0, n_elements(waves) -1  do files = create_struct('aia_'+waves[i],'',files)
     
     
     for i = 0, n_elements(ds)-1 do begin
-      gx_box_download_jsoc_data_get_fits, t1, t2, ds[i], segment[i], waves = waves[i], out_dir, cache_dir = cache_dir
+      files.(i) =gx_box_jsoc_get_fits(t1, t2, ds[i], segment[i], cache_dir, wave = waves[i])
     endfor
-  endif
-
+  return, files
 end
