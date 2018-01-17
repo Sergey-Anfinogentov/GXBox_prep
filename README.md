@@ -1,7 +1,6 @@
-# IDL_magnetic
+# GX box preparation library
 
-The repository contains IDL rootines for working with SDO/HMI magnetograms.
-For preparing a GX-simulator compayible box file please read  the [instruction](doc/gx_box_instruction.md).
+The repository contains IDL routines For preparing a GX-simulator compatible box files.  The practical usage description is given in the provided [instruction](doc/gx_box_instruction.md) .
 
 
 ## Dependencies

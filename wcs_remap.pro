@@ -14,7 +14,8 @@
   ;
   ; :Author: Sergey Anfinogentov (anfinogentov@iszf.irk.ru)
   ;-
-function wcs_remap, data_from, wcs_from, wcs_to, sample = sample
+function wcs_remap, data_from, wcs_from, wcs_to, sample = sample, ssaa = ssaa
+  if keyword_set(ssaa) then return, wcs_remap_ssaa(data_from, wcs_from, wcs_to)
   cc_to = wcs_get_coord(wcs_to)
   wcs_convert_from_coord,wcs_to,cc_to,'HG', lon, lat, /carrington
   wcs_convert_to_coord,wcs_from,cc_from,'HG', lon, lat, /carrington

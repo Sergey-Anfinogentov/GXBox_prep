@@ -24,13 +24,22 @@
   ; :Author: Sergey Anfinigentov (sergey.istp@gmail.com)
   ;-
 pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_dir = tmp_dir,$
-  aia_euv = aia_euv, aia_uv = aia_uv, auto_delete = auto_delete,top = top, cea = cea, carrington = carrington
+  aia_euv = aia_euv, aia_uv = aia_uv, auto_delete = auto_delete,top = top, cea = cea,$
+   carrington = carrington, sfq = sfq
   if not keyword_set(out_dir) then cd, current = out_dir
   if not keyword_set(tmp_dir) then tmp_dir = filepath('jsoc_cache',root = GETENV('IDL_TMPDIR'))
   if not keyword_set(dx_km) then dx_km = 1000d
   if not keyword_Set(size_pix) then size_pix = [128,128,64]
   
   gx_box_download_hmi_data, time, out_dir, cache_dir = tmp_dir
+  
+;  download_data, time, tmp_dir, $
+;    field_index, field_data, $
+;    inclination_index, inclination_data, $
+;    azimuth_index, azimuth_data, $
+;    disambig_index, disambig_data, $
+;    bz_index, bz_data, $
+;    ic_index, ic_data
   
   file_field  =     gx_box_get_file(out_dir, /field)
   file_inclination= gx_box_get_file(out_dir, /inclination)
@@ -40,7 +49,7 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
   file_los =        gx_box_get_file(out_dir, /magnetogram)
 
   box = gx_box_create(file_field, file_inclination, file_azimuth,file_disambig,$
-     file_continuum, centre, size_pix, dx_km,top = top, cea = cea, carrington = carrington)
+     file_continuum, centre, size_pix, dx_km,top = top, cea = cea, carrington = carrington, sfq = sfq)
   gx_box_add_refmap, box, file_continuum, id = 'Continuum'
   gx_box_add_refmap, box, file_los, id = 'LOS_magnetogram'
   
