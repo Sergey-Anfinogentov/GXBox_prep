@@ -41,19 +41,19 @@ function wcs_remap_ssaa, data_from, wcs_from, wcs_to, sample = sample
   a = 2d
   ns = 8
   n = ns^2
-  dx = linspace(-1d,1d,ns)#replicate(1d,ns)
-  dy = linspace(-1d,1d,ns)##replicate(1d,ns)
+  dx = gx_box_linspace(-1d,1d,ns)#replicate(1d,ns)
+  dy = gx_box_linspace(-1d,1d,ns)##replicate(1d,ns)
   dx*=a
   dy*=a
   w = lanczos(dx,a=a)*lanczos(dy,a=a)
   w /= total(w)
   
-  
+  result = dblarr(nx,ny)
   
   for i = 0, n-1 do begin
     pix_to = dblarr(2,nx,ny)
-    pix_to[0,*,*] = linspace(0d,nx-1,nx) #  replicate(1d,ny) + dx[i]
-    pix_to[1,*,*] = linspace(0d,ny-1,ny) ## replicate(1d,nx) + dy[i]
+    pix_to[0,*,*] = gx_box_linspace(0d,nx-1,nx) #  replicate(1d,ny) + dx[i]
+    pix_to[1,*,*] = gx_box_linspace(0d,ny-1,ny) ## replicate(1d,nx) + dy[i]
     cc_to = wcs_get_coord(wcs_to,pix_to)
     wcs_convert_from_coord,wcs_to,cc_to,'HG', lon, lat, /carrington
     wcs_convert_to_coord,wcs_from,cc_from,'HG', lon, lat, /carrington
