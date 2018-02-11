@@ -14,8 +14,6 @@
 ;-
 function gx_box_download_hmi_data, t, tmp_dir
   
-
-  
   t_ = anytim(t)
   t1 = t_ - 720d/2d
   t2 = t_ + 720d/2d
