@@ -19,6 +19,7 @@ end
     ; :Author: Sergey Anfinogentov
     ;-
 function gx_box_jsoc_try_cache, dir, query
+  if not file_test(dir) then file_mkdir,dir
   index_file = filepath('index.sav', root = dir)
   If not file_test(index_file) then begin
     queries = []
@@ -50,6 +51,7 @@ end
     ;-
 pro gx_box_jsoc_save2cache, dir, query, data, index, file
   index_file = filepath('index.sav', root = dir)
+  if not file_test(dir) then file_mkdir,dir
   If not file_test(index_file) then begin
     queries = []
     files = []
