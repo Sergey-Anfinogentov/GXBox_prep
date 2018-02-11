@@ -38,20 +38,13 @@ end
 function wcs_remap_ssaa, data_from, wcs_from, wcs_to, sample = sample
   nx = wcs_to.naxis[0]
   ny = wcs_to.naxis[1]
-  
-   result = dblarr(nx, ny)
-  s = random_seed()
   a = 2d
   ns = 8
   n = ns^2
-  ;dx = randomu(s,n) -0.5d
-  ;dy = randomu(s,n) -0.5d
   dx = linspace(-1d,1d,ns)#replicate(1d,ns)
   dy = linspace(-1d,1d,ns)##replicate(1d,ns)
   dx*=a
   dy*=a
-  
- ; w = dx*0+1d;lanczos(dx,a=a)*lanczos(dy,a=a)
   w = lanczos(dx,a=a)*lanczos(dy,a=a)
   w /= total(w)
   
