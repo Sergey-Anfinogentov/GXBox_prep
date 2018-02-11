@@ -7,12 +7,12 @@
 ;
 ; :Params:
 ;    t - time of the magnetogram (any format recognised by ANYTIM)
-;    out_dir - directory to save downloaded files
+;    tmp_dir - directory to save downloaded files
 ;
 ;
 ; :Author: Sergey Anfinogentov (sergey.istp@gmail.com)
 ;-
-function gx_box_download_hmi_data, t, out_dir, cache_dir = cache_dir
+function gx_box_download_hmi_data, t, tmp_dir
   
 
   
@@ -20,14 +20,12 @@ function gx_box_download_hmi_data, t, out_dir, cache_dir = cache_dir
   t1 = t_ - 720d/2d
   t2 = t_ + 720d/2d
 
-  if not keyword_set(out_dir) then outdir = ''
-
   ds = ['hmi.B_720s','hmi.B_720s','hmi.B_720s','hmi.B_720s','hmi.M_720s','hmi.Ic_noLimbDark_720s']
   segment = ['field','inclination','azimuth','disambig','magnetogram','continuum']
   files = {field:'',inclination:'',azimuth:'',disambig:'',magnetogram:'',continuum:''}
   
   for i = 0, n_elements(ds)-1 do begin
-    files.(i) =gx_box_jsoc_get_fits(t1, t2, ds[i], segment[i], cache_dir)
+    files.(i) =gx_box_jsoc_get_fits(t1, t2, ds[i], segment[i], tmp_dir)
   endfor
   
  return, files

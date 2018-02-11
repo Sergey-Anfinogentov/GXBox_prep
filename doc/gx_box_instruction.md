@@ -18,17 +18,18 @@ Then, one need to set up the observation time, centre of the box in arc seconds 
   size_pix=[128,128,128]
 ```
 
-All of this parameters should be passed to the  `GX_BOX_PREPARE_BOX` routine. It will download all required data or take them from temporary directory if present, produce a GX-Simulator compatible box file in the output directory.
+All of this parameters should be passed to the  `GX_BOX_PREPARE_BOX` routine. It will download all required data or take them from temporary directory if present, and produce a GX-Simulator compatible box file in the output directory.
 ```idl
  gx_box_prepare_box, time, centre, size_pix, dx_km,$
-    out_dir = out_dir,/top, tmp_dir = tmp_dir,/auto_delete
+    out_dir = out_dir,/top, tmp_dir = tmp_dir
 ```
  `GX_BOX_PREPARE_BOX` routine supports the following options:
 
+- `out_dir` the output directory where the box file will be written to. Default value is current working dirrectory
+- `tmp_dir` the directory for saving downloaded files. Default value is the system temporary directory returned by `GETENV('IDL_TMPDIR')`call. 
 - `/cea` set this keyword to calculate the base of the box using the CEA projection
 - `/top` set this keyword to calculate the base of the box using the CEA projection
 - `/carrington` set this keyword to indicate that the box centre is given as Carrington longitude and latitude
-- `/auto_delete` set this keyword to automaticly delete decompressed FITS files from the output directory
 - `/aia_euv` set this keyword to download SDO/AIA images in EUV channels and to include them in the model as reference maps
 - `/aia_uv` set this keyword to download SDO/AIA images in UV (1600 and 1700 Angstrom) channels and to include them in the model as reference maps
 
@@ -40,13 +41,15 @@ The low level procedure of "manual" creation of the box file is given below.
 
 SDO/HMI FITS files can be downloaded from the http://jsoc.stanford.edu/ajax/lookdata.html. 
 
-Alternatively, all required data can be downloaded using the `GX_BOX_DOWNLOAD_HMI_DATA` routine: 
+Alternatively, all required data can be downloaded using the `GX_BOX_DOWNLOAD_HMI_DATA` function: 
 
 ```idl
 time = '2016-02-20 17:00:00'
-out_dir = 'C:\data'
-gx_box_download_hmi_data, time, out_dir
+tmp_dir = 'C:\tmp_data'
+files = gx_box_download_hmi_data(time, tmp_dir)
 ```
+
+The program will save downloaded files in a temporary directory (`tmp_dir`) and return names of the downloaded files as a structure. 
 
 The toolchain is designed to use the full disk images and magnetograms:
 
@@ -62,11 +65,11 @@ The toolchain is designed to use the full disk images and magnetograms:
 ### Creating the box structure
 The box structure can be created using the following IDL code:
 ```idl
-box = gx_box_create(file_field, file_inclination, file_azimuth,$
-file_disambig, file_continuum, centre, size_pix, dx_km, /cea)
+box = gx_box_create(files.field, files.inclination, files.azimuth,$
+files.disambig, files.continuum, centre, size_pix, dx_km, /cea)
 ```
 where:
-* `file_field`, `file_inclination`, `file_azimuth`, `file_disambig` and  `file_continuum` are paths to the SDO/HMI FITS files, 
+* `files.field`, `files.inclination`, `files.azimuth`, `files.disambig` and  `files.continuum` are paths to the SDO/HMI FITS files returned by `gx_box_download_hmi_data`, 
 * `centre` is the position of the cetre of the box in arcseconds,
 * `size_pix` is requested size of the box in voxels,
 * `dx_km` is the requsted spatial resolution (voxel size) of the box,
@@ -92,15 +95,15 @@ return_code = gx_box_make_nlfff_wwas_field("WWNLFFFReconstruction.dll", box)
 ### Adding reference maps to the box
 Optionally, one can add to the box reference maps using the `gx_box_add_refmap` procedure. For example, the following code adds LOS field and Continuum  reference maps:
 ```IDL
-gx_box_add_refmap, box, file_bz, id = 'Bz_reference'
-gx_box_add_refmap, box, file_continuum, id = 'Ic_reference'
+gx_box_add_refmap, box, files.magnetogram, id = 'Bz_reference'
+gx_box_add_refmap, box, files.continuum, id = 'Ic_reference'
 ```
 where:
 * `box` is the box structure created with the `gx_box_create` function
-* `file_bz` is the path of the FITS file containing LOS field observations
+* `files.magnetogram`and `files.continuum` are the paths to the FITS files containing LOS field and continuum images downloaded by  `gx_box_download_hmi_data`.
 * `id = 'Bz_reference'` is the keyword, specifing ID of the map
 
-## +Saving the result
+## Saving the result
 Now the box structure  can be saved to a file, which can be later imported into GX-Simulator.
 ```IDL
  save, box, file ='testbox.sav'
