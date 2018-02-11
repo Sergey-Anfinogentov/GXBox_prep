@@ -16,7 +16,7 @@
 pro gx_box_add_refmap, box, fits_file, id = id
 
   wcs = fitshead2wcs(box.index)
-  read_sdo,fits_file, index, data, /uncomp_delete, /use_shared_lib
+  read_sdo,fits_file, index, data, /uncomp_delete;, /use_shared_lib
   wcs_input = fitshead2wcs(index)
   
   ;trying to correct position bug

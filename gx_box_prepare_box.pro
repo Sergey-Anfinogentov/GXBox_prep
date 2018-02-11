@@ -29,7 +29,7 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
   if not keyword_set(dx_km) then dx_km = 1000d
   if not keyword_Set(size_pix) then size_pix = [128,128,64]
   
-  files = gx_box_download_hmi_data(time, out_dir, cache_dir = tmp_dir)
+  files = gx_box_download_hmi_data(time, tmp_dir)
   
 ;  download_data, time, tmp_dir, $
 ;    field_index, field_data, $

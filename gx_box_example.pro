@@ -11,7 +11,7 @@
   ;-
 pro gx_box_example
   out_dir = '/Users/sergey/data_local/gx_box_test'
-  tmp_dir = '/Users/sergey/temp/jsoc_cache'
+  tmp_dir = '/Users/sergey/temp/jsoc_cache2'
   
   time='2017-08-05 18:05:00'
   centre=[-422.,-192.0] ; arcseconds

@@ -36,7 +36,7 @@ function prepare_basemaps, file_field, file_inclination, file_azimuth, file_disa
    if (not keyword_set(cea)) and (not keyword_set(top)) then cea = 1
 
   files = [file_field, file_inclination, file_azimuth]
-  read_sdo,files, index, data, /uncomp_delete, /use_shared_lib
+  read_sdo,files, index, data, /uncomp_delete;, /use_shared_lib
   
   ind = where(finite(data,/nan))
   data[ind] = 0
@@ -117,7 +117,7 @@ function prepare_basemaps, file_field, file_inclination, file_azimuth, file_disa
   endif else begin
   
   ;Apply disambigution--------------------------------
-  read_sdo, file_disambig, index, disambig, /uncomp_delete, /use_shared_lib
+  read_sdo, file_disambig, index, disambig, /uncomp_delete;, /use_shared_lib
   azimuth  =reform(data[*,*,2])
   hmi_disambig, azimuth, disambig, 0
   data[*,*,2] = azimuth
@@ -138,7 +138,7 @@ function prepare_basemaps, file_field, file_inclination, file_azimuth, file_disa
   bt = wcs_remap(bptr[*,*,1],wcs0, wcs, /ssaa)
   br = wcs_remap(bptr[*,*,2],wcs0, wcs, /ssaa)
   
-  read_sdo, file_continuum, index, data, /uncomp_delete,/use_shared_lib
+  read_sdo, file_continuum, index, data, /uncomp_delete;,/use_shared_lib
   wcs0 = FITSHEAD2WCS( index[0] )
   wcs2map,data, wcs0, map
   map2wcs, map,wcs0
