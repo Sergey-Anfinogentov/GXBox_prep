@@ -31,7 +31,21 @@ function gx_box_jsoc_try_cache, dir, query
   if n_elements(queries) eq 0 then return, ''
   ind = where(queries eq query)
   if ind[0] eq -1 then return, ''
-  return, files[ind]
+  file = files[ind]
+  if not file_test(file) then begin ;File is not found
+    ind = where(queries ne query)
+    if ind[0] eq -1 then begin
+      queries = []
+      files = []
+      save, queries, files, file = index_file
+      return, ''
+    endif
+    queries = queries[ind]
+    files = files[ind]
+    save, queries, files, file = index_file
+    return, ''
+  endif
+  return, file
 end
 
 ;+
