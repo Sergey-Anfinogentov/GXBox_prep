@@ -26,11 +26,12 @@ function gx_box_download_aia_data, t, out_dir, cache_dir = cache_dir, UV = UV, E
     endif
     
     
-    for i =0, n_elements(waves) -1  do files = create_struct('aia_'+waves[i],'',files)
+    
     
     
     for i = 0, n_elements(ds)-1 do begin
-      files.(i) =gx_box_jsoc_get_fits(t1, t2, ds[i], segment[i], cache_dir, wave = waves[i])
+      file = gx_box_jsoc_get_fits(t1, t2, ds[i], segment[i], cache_dir, wave = waves[i])
+      files = create_struct('aia_'+waves[i],file[0],files)
     endfor
   return, files
 end

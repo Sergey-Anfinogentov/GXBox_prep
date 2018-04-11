@@ -45,7 +45,7 @@ function gx_box_jsoc_try_cache, dir, query
     save, queries, files, file = index_file
     return, ''
   endif
-  return, file
+  return, file[0]
 end
 
 ;+
