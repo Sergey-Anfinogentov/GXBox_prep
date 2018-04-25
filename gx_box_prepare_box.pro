@@ -61,21 +61,21 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
     
    
     
-    gx_box_add_refmap, box, files.aia_94,  id = 'AIA_94'
-    gx_box_add_refmap, box, files.aia_131, id = 'AIA_131'
-    gx_box_add_refmap, box, files.aia_171, id = 'AIA_171'
-    gx_box_add_refmap, box, files.aia_193, id = 'AIA_193'
-    gx_box_add_refmap, box, files.aia_211, id = 'AIA_211'
-    gx_box_add_refmap, box, files.aia_304, id = 'AIA_304'
-    gx_box_add_refmap, box, files.aia_335, id = 'AIA_335'
+    if have_tag(files,'aia_94') then gx_box_add_refmap, box, files.aia_94,  id = 'AIA_94'
+    if have_tag(files,'aia_131') then gx_box_add_refmap, box, files.aia_131, id = 'AIA_131'
+    if have_tag(files,'aia_171') then gx_box_add_refmap, box, files.aia_171, id = 'AIA_171'
+    if have_tag(files,'aia_193') then gx_box_add_refmap, box, files.aia_193, id = 'AIA_193'
+    if have_tag(files,'aia_211') then gx_box_add_refmap, box, files.aia_211, id = 'AIA_211'
+    if have_tag(files,'aia_304') then gx_box_add_refmap, box, files.aia_304, id = 'AIA_304'
+    if have_tag(files,'aia_335') then gx_box_add_refmap, box, files.aia_335, id = 'AIA_335'
     
   endif
   
   if keyword_set(AIA_UV) then begin
     files=gx_box_download_AIA_data(time, out_dir, cache_dir = tmp_dir, /uv)
 
-    gx_box_add_refmap, box, files.aia_1600,  id = 'AIA_1600'
-    gx_box_add_refmap, box, files.aia_1700,  id = 'AIA_1700'
+    if have_tag(files,'aia_1600') then gx_box_add_refmap, box, files.aia_1600,  id = 'AIA_1600'
+    if have_tag(files,'aia_1700') then gx_box_add_refmap, box, files.aia_1700,  id = 'AIA_1700'
     
 
   endif

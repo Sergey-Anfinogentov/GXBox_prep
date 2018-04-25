@@ -115,8 +115,12 @@ function gx_box_jsoc_get_fits, t1, t2, ds, segment, cache_dir, wave = wave
   if result ne '' then return, result
 
 
-  ssw_jsoc_time2data, t1, t2, index, urls, /urls_only, ds=ds, segment=segment, wave=wave
- 
+  ssw_jsoc_time2data, t1, t2, index, urls, /urls_only, ds=ds, segment=segment, wave=wave, count = count
+  
+  if n_elements(urls) eq 0 then begin
+    message, 'can not download data for ds ="'+ds+'" and wave = ' + strcompress(wave), /info
+    return , ''
+  endif
   index = index[0]
   url  = urls[0] 
   local_file = gx_box_jsoc_make_filename(index, ds, segment,wave = wave)
