@@ -1,7 +1,10 @@
 ;+
   ; :Description:
   ;    Prepares a GX-simulator comptible box filled with the potential field.
-  ;    All required data are download automatically.
+  ;    All required data are download automatically. Normally, the full magnetic
+  ;    field vector at the lower boundary is preserved to be used for subsequent
+  ;    NLFFF extrapolation. If you need the field at the lower boundary to be replaced
+  ;    with the potential field, use the 'make_pbox' keyword.
   ;
   ; :Params:
   ;    time - Requested time
@@ -18,12 +21,15 @@
   ;    carrington - set this keyword if the box center is given as carrington longitude and latitude in degrees
   ;    cea - set this keyword to use the CEA projection for the base of the box
   ;    top - set this keyword to use the TOP VIEW projection for the base of the box
+  ;    make_pbox - set this keyword to produce additional GX-simulator compatible box structure
+  ;            to hold the potential field solution in the whole box including lower boundary.
+  ;    sfq - perform SFQ disambiguation (see http://adsabs.harvard.edu/abs/2014SoPh..289.1499R)
   ;
   ; :Author: Sergey Anfinigentov (sergey.istp@gmail.com)
   ;-
 pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_dir = tmp_dir,$
   aia_euv = aia_euv, aia_uv = aia_uv, top = top, cea = cea,$
-   carrington = carrington, sfq = sfq
+   carrington = carrington, sfq = sfq, make_pbox = make_pbox
   if not keyword_set(out_dir) then cd, current = out_dir
   if not file_test(out_dir) then file_mkdir, out_dir
   if not keyword_set(tmp_dir) then tmp_dir = filepath('jsoc_cache',root = GETENV('IDL_TMPDIR'))
@@ -32,28 +38,18 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
   if not keyword_Set(size_pix) then size_pix = [128,128,64]
   
   files = gx_box_download_hmi_data(time, tmp_dir)
-  
-;  download_data, time, tmp_dir, $
-;    field_index, field_data, $
-;    inclination_index, inclination_data, $
-;    azimuth_index, azimuth_data, $
-;    disambig_index, disambig_data, $
-;    bz_index, bz_data, $
-;    ic_index, ic_data
-  
-;  file_field  =     ;gx_box_get_file(out_dir, /field)
-;  file_inclination= ;gx_box_get_file(out_dir, /inclination)
-;  file_azimuth=     ;gx_box_get_file(out_dir, /azimuth)
-;  file_disambig=    ;gx_box_get_file(out_dir, /disambig)
-;  file_continuum=   ;gx_box_get_file(out_dir, /continuum)
-;  file_los =       ; gx_box_get_file(out_dir, /magnetogram)
 
   box = gx_box_create(files.field, files.inclination, files.azimuth,files.disambig,$
      files.continuum, centre, size_pix, dx_km,top = top, cea = cea, carrington = carrington, sfq = sfq)
   gx_box_add_refmap, box, files.continuum, id = 'Continuum'
   gx_box_add_refmap, box, files.magnetogram, id = 'LOS_magnetogram'
   
-  gx_box_make_potential_field, box
+  if keyword_set(make_pbox) then begin
+    gx_box_make_potential_field, box, pbox
+  endif else begin
+    gx_box_make_potential_field, box
+  endelse
+  
   
   ;Downloading AIA data in EUV channels
   if keyword_set(AIA_EUV) then begin
@@ -81,5 +77,9 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
   endif
   
   save, box, file =filepath(box.id+".sav",root_dir = out_dir)
+  if keyword_set(make_pbox) then begin
+    box = pbox
+    save, box, file =filepath(box.id+".sav",root_dir = out_dir)
+  endif
   ;stop
 end

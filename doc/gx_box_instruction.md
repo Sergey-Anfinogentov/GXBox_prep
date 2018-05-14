@@ -3,7 +3,9 @@ Please, check the most recent version of needed IDL routines at https://github.c
 
 ## Automated preparation of the box file
 
-The library contains `GX_BOX_PREPARE_BOX` routine that allows preparation of the GX-Simulator compatible box file with automatic download of all required data. To use this routine, one can follow the following template code.
+The library contains `GX_BOX_PREPARE_BOX` routine that allows preparation of the GX-Simulator compatible box file with automatic download of all required data. The routine will produce  '\*.BND.sav' box file containing potential field everywhere but at the bottom boundary where the observed magnetic field vector is preserved. If you need a box file with the potential field in the whole volume including the lower boundary, set the `/make_pbox` keyword and the potential field will be saves in the  '\*.POT.sav'  file.
+
+To use this routine, one can follow the following template code.
 
 Specify the output directory to store the box file and temporary directory to save downloaded compressed data segments for futher usage:
 ```idl
@@ -21,7 +23,7 @@ Then, one need to set up the observation time, centre of the box in arc seconds 
 All of this parameters should be passed to the  `GX_BOX_PREPARE_BOX` routine. It will download all required data or take them from temporary directory if present, and produce a GX-Simulator compatible box file in the output directory.
 ```idl
  gx_box_prepare_box, time, centre, size_pix, dx_km,$
-    out_dir = out_dir,/top, tmp_dir = tmp_dir
+    out_dir = out_dir,/top, tmp_dir = tmp_dir, /make_pbox
 ```
  `GX_BOX_PREPARE_BOX` routine supports the following options:
 
@@ -32,6 +34,7 @@ All of this parameters should be passed to the  `GX_BOX_PREPARE_BOX` routine. It
 - `/carrington` set this keyword to indicate that the box centre is given as Carrington longitude and latitude
 - `/aia_euv` set this keyword to download SDO/AIA images in EUV channels and to include them in the model as reference maps
 - `/aia_uv` set this keyword to download SDO/AIA images in UV (1600 and 1700 Angstrom) channels and to include them in the model as reference maps
+- `/make_pbox` - set this keyword to produce an addtional box file ('*.POT.sav') with the bottom boundary filled with the potential field. 
 
 The low level procedure of "manual" creation of the box file is given below.
 
