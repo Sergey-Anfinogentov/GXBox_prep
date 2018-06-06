@@ -121,8 +121,14 @@ function gx_box_jsoc_get_fits, t1, t2, ds, segment, cache_dir, wave = wave
     message, 'can not download data for ds ="'+ds+'" and wave = ' + strcompress(wave), /info
     return , ''
   endif
-  index = index[0]
-  url  = urls[0] 
+  
+  t_request = (anytim(t1) + anytim(t2))*.5
+  times_str = str_replace(strmid((index.t_obs),0,10),'.','-') + strmid((index.t_obs),10)
+  t_found =anytim(times_str);anytim(index.t_obs)
+  foo = min(abs(t_request - t_found),ind)
+  
+  index = index[ind]
+  url  = urls[ind] 
   local_file = gx_box_jsoc_make_filename(index, ds, segment,wave = wave)
   tmp_dir = GETENV('IDL_TMPDIR')
   tmp_file = filepath(local_file, /tmp)

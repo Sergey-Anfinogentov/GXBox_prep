@@ -28,8 +28,9 @@
   ; :Author: Sergey Anfinigentov (sergey.istp@gmail.com)
   ;-
 pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_dir = tmp_dir,$
-  aia_euv = aia_euv, aia_uv = aia_uv, top = top, cea = cea,$
-   carrington = carrington, sfq = sfq, make_pbox = make_pbox
+                  aia_euv = aia_euv, aia_uv = aia_uv, top = top, cea = cea,$
+                  carrington = carrington, sfq = sfq, make_pbox = make_pbox,$
+                  HMI_time_window = HMI_time_window, AIA_time_window = AIA_time_window
   if not keyword_set(out_dir) then cd, current = out_dir
   if not file_test(out_dir) then file_mkdir, out_dir
   if not keyword_set(tmp_dir) then tmp_dir = filepath('jsoc_cache',root = GETENV('IDL_TMPDIR'))
@@ -37,7 +38,7 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
   if not keyword_set(dx_km) then dx_km = 1000d
   if not keyword_Set(size_pix) then size_pix = [128,128,64]
   
-  files = gx_box_download_hmi_data(time, tmp_dir)
+  files = gx_box_download_hmi_data(time, tmp_dir, time_window = HMI_time_window)
 
   box = gx_box_create(files.field, files.inclination, files.azimuth,files.disambig,$
      files.continuum, centre, size_pix, dx_km,top = top, cea = cea, carrington = carrington, sfq = sfq)
@@ -53,7 +54,7 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
   
   ;Downloading AIA data in EUV channels
   if keyword_set(AIA_EUV) then begin
-    files = gx_box_download_AIA_data(time, out_dir, cache_dir = tmp_dir, /euv)
+    files = gx_box_download_AIA_data(time, out_dir, cache_dir = tmp_dir, /euv, time_window = AIA_time_window)
     
    
     
@@ -68,7 +69,7 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
   endif
   
   if keyword_set(AIA_UV) then begin
-    files=gx_box_download_AIA_data(time, out_dir, cache_dir = tmp_dir, /uv)
+    files=gx_box_download_AIA_data(time, out_dir, cache_dir = tmp_dir, /uv, time_window = AIA_time_window)
 
     if have_tag(files,'aia_1600') then gx_box_add_refmap, box, files.aia_1600,  id = 'AIA_1600'
     if have_tag(files,'aia_1700') then gx_box_add_refmap, box, files.aia_1700,  id = 'AIA_1700'

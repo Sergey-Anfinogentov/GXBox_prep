@@ -8,15 +8,19 @@
 ; :Params:
 ;    t - time of the magnetogram (any format recognised by ANYTIM)
 ;    tmp_dir - directory to save downloaded files
-;
+; :Keywords:
+;   time_window - time window in seconds to search HMI data (default: 720)
 ;
 ; :Author: Sergey Anfinogentov (sergey.istp@gmail.com)
 ;-
-function gx_box_download_hmi_data, t, tmp_dir
+function gx_box_download_hmi_data, t, tmp_dir, time_window = time_window
+compile_opt idl2
+
+  if not keyword_set(time_window) then time_window =720d
   
   t_ = anytim(t)
-  t1 = t_ - 720d/2d
-  t2 = t_ + 720d/2d
+  t1 = t_ - time_window / 2d
+  t2 = t_ + time_window / 2d
 
   ds = ['hmi.B_720s','hmi.B_720s','hmi.B_720s','hmi.B_720s','hmi.M_720s','hmi.Ic_noLimbDark_720s']
   segment = ['field','inclination','azimuth','disambig','magnetogram','continuum']

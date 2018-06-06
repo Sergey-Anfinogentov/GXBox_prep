@@ -1,13 +1,13 @@
-function gx_box_download_aia_data, t, out_dir, cache_dir = cache_dir, UV = UV, EUV = EUV
+function gx_box_download_aia_data, t, out_dir, cache_dir = cache_dir, UV = UV, EUV = EUV, time_window = time_window
   
   if not keyword_set(UV) and not keyword_set(EUV) then EUV = 1
   t_ = anytim(t)
-
   
+    if not keyword_set(time_window) then time_window = 12d
+    if keyword_set(UV) then time_window = time_window > 24d
 
-    t1 = t_ - 12d/2d
-    t2 = t_ + 12d/2d +12d
-
+    t1 = t_ - time_window/2d
+    t2 = t_ + time_window/2d
     
     waves = []
     ds = []
