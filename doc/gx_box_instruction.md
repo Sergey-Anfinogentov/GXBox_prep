@@ -1,5 +1,5 @@
 # Instruction for creating a GX-simulator compatible box file
-Please, check the most recent version of needed IDL routines at https://github.com/Sergey-Anfinogentov/IDL_magnetic.
+Please, check the most recent version of needed IDL routines at https://github.com/Sergey-Anfinogentov/GXBox_prep.
 
 ## Automated preparation of the box file
 
