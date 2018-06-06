@@ -30,7 +30,8 @@
 pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_dir = tmp_dir,$
                   aia_euv = aia_euv, aia_uv = aia_uv, top = top, cea = cea,$
                   carrington = carrington, sfq = sfq, make_pbox = make_pbox,$
-                  HMI_time_window = HMI_time_window, AIA_time_window = AIA_time_window
+                  HMI_time_window = HMI_time_window, AIA_time_window = AIA_time_window,$
+                  box = box, pbox = pbox
   if not keyword_set(out_dir) then cd, current = out_dir
   if not file_test(out_dir) then file_mkdir, out_dir
   if not keyword_set(tmp_dir) then tmp_dir = filepath('jsoc_cache',root = GETENV('IDL_TMPDIR'))
