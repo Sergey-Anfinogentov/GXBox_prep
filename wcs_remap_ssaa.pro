@@ -35,7 +35,7 @@ end
   ;
   ; :Author: Sergey Anfinogentov (anfinogentov@iszf.irk.ru)
   ;-
-function wcs_remap_ssaa, data_from, wcs_from, wcs_to, sample = sample
+function wcs_remap_ssaa, data_from, wcs_from, wcs_to, sample = sample, missing = missing
   nx = wcs_to.naxis[0]
   ny = wcs_to.naxis[1]
   a = 2d
@@ -58,7 +58,7 @@ function wcs_remap_ssaa, data_from, wcs_from, wcs_to, sample = sample
     wcs_convert_from_coord,wcs_to,cc_to,'HG', lon, lat, /carrington
     wcs_convert_to_coord,wcs_from,cc_from,'HG', lon, lat, /carrington
     pix = wcs_get_pixel(wcs_from, cc_from)
-    result += w[i] * reform(interpolate(data_from,pix[0,*,*], pix[1,*,*])) 
+    result += w[i] * reform(interpolate(data_from,pix[0,*,*], pix[1,*,*], missing = missing)) 
   endfor
 
   return, result
