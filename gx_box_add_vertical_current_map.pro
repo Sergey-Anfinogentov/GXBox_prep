@@ -1,3 +1,18 @@
+;+
+  ; :Description:
+  ;    Adds vertical current map to the specified GX-simulator compatible box structure
+  ;
+  ; :Params:
+  ;    box - box structure
+  ;    file_field       - filename of the SDO/HMI fits with the magnetic field absolute value
+  ;    file_inclination - filename of the SDO/HMI fits with the magnetic field inclination
+  ;    file_azimuth     - filename of the SDO/HMI fits with the magnetic field azimuth
+  ;    file_disambig    - filename of the SDO/HMI fits with the disambiguation information
+  ;
+  ;
+  ;
+  ; :Author: Sergey Anfinogentov (anfinogentov@iszf.irk.ru)
+  ;-
 pro gx_box_add_vertical_current_map, box, file_field, file_inclination, file_azimuth, file_disambig
   if !version.os_family eq 'unix' then use_shared_lib = 1
   

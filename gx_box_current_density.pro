@@ -1,3 +1,16 @@
+;+
+; :Description:
+;    Computes cross product of two vectors [A x B]
+;
+; :Params:
+;    A - first term
+;    B - second term
+;
+; :Keywords:
+;    NORM - set this to assign unit length to the result vector
+;
+; :Author: Sergey Anfinogentov (anfinogentov@iszf.irk.ru)
+;-
 function VxV , A , B , NORM=NORM
 
 	C = A*0
@@ -14,7 +27,24 @@ end
 
 
 
-;Jr = Current_Density( B0_pp_crt , B1_pp_crt , B2_pp_crt , CRPIX1-index[0] , CRPIX2-index[1] , CDELT1 , CDELT2 , RSun ); * mask
+;+
+; :Description:
+;    Calculates vertical current density from a photospheric vector magnetogram
+;
+; :Params:
+;    B0     - dblarr(nx, ny), LOS component of the magnetic field (Bz)
+;    B1     - dblarr(nx, ny), EW  component of the magnetic field (Bx)
+;    B2     - dblarr(nx, ny), NS  component of the magnetic field (By)
+;    CRPIX1 - CRPIX1 parameter from the FITS header (X-coordinate of the disk centre in pixels)
+;    CRPIX2 - CRPIX2 parameter from the FITS header (Y-coordinate of the disk centre in pixels)
+;    CDELT1 - CDELT1 parameter from the FITS header (pixel width  in arcsec)
+;    CDELT2 - CDELT1 parameter from the FITS header (pixel height in arcsec)
+;    RSun   - visible Radius of the Sun in arcsec
+;
+;
+;
+; :Author: Ivan Myshyakov (ivan_m@iszf.irk.ru)
+;-
 function GX_box_Current_Density, B0,B1,B2 ,$
                           CRPIX1 , CRPIX2 , CDELT1 , CDELT2 , RSun
 
