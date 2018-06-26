@@ -45,6 +45,7 @@ pro gx_box_prepare_box, time, centre, size_pix, dx_km, out_dir = out_dir, tmp_di
      files.continuum, centre, size_pix, dx_km,top = top, cea = cea, carrington = carrington, sfq = sfq)
   gx_box_add_refmap, box, files.continuum, id = 'Continuum'
   gx_box_add_refmap, box, files.magnetogram, id = 'LOS_magnetogram'
+  gx_box_add_vertical_current_map, box, files.field, files.inclination, files.azimuth, files.disambig
   
   if keyword_set(make_pbox) then begin
     gx_box_make_potential_field, box, pbox
