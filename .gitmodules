@@ -1,0 +1,3 @@
+[submodule "SFQ"]
+	path = SFQ
+	url = https://github.com/Sergey-Anfinogentov/SFQ
