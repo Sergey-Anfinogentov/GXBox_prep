@@ -21,7 +21,7 @@ pro gx_box_add_vertical_current_map, box, file_field, file_inclination, file_azi
   wcs0 = FITSHEAD2WCS( index[0] )
   
   ind = where(finite(data,/nan))
-  if ind ne -1 then data[ind] = 0
+  if ind[0] ne -1 then data[ind] = 0
   
   read_sdo, file_disambig, index, disambig, /uncomp_delete;, /use_shared_lib
   azimuth  =reform(data[*,*,2])
